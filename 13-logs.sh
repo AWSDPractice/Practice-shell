@@ -6,7 +6,7 @@
  G="\e[32m"
  y="\e[33m"
 
- LOGS_FOLDER="var/log/Practice-shell-logs"
+ LOGS_FOLDER="var/log/Practiceshell-logs"
  LOG_FILE=$(echo $0|cut -d "." -f1)
  TIME_STAMP=$(date +y-%m-%d-%h-%m)
  LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
