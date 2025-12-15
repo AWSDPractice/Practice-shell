@@ -6,9 +6,9 @@
  G="\e[32m"
  y="\e[33m"
 
- LOGS_FOLDER="var/log/Practiceshell-logs"
- LOG_FILE=$(echo $0|cut -d "." -f1)
- TIME_STAMP=$(date +y-%m-%d-%h-%m)
+ LOGS_FOLDER="var/log/shellscript-logs"
+ LOG_FILE=$(echo $0 | cut -d "." -f1)
+ TIME_STAMP=$(date +y-%m-%d-%h-%M)
  LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 
@@ -24,7 +24,7 @@ VALIDATE(){
 
 }
 
-    echo "script execution history at : $TIMESTAMP"  &>>$LOG_FILE_NAME
+echo "script execution history at: $TIMESTAMP"  &>>$LOG_FILE
 
  if [ $USERID -gt 0 ]
  then
@@ -32,21 +32,21 @@ VALIDATE(){
     exit 1 # other than 0
 fi 
 
-    dnf list installed mysql  &>>$LOG_FILE_NAME
+    dnf list installed mysql  &>>$LOG_FILE
 
 if [ $? -ne 0 ]
 then
-    dnf install mysql -y  &>>$LOG_FILE_NAME
+    dnf install mysql -y  &>>$LOG_FILE
     VALIDATE $?
 else
     echo -e "MYSQL is already.... $y INSTALLED"
 fi
 
-    dnf list installed git &>>$LOG_FILE_NAME
+    dnf list installed git &>>$LOG_FILE
 
 if [ $? -ne 0 ]
 then
-    dnf install git -y  &>>$LOG_FILE_NAME
+    dnf install git -y  &>>$LOG_FILE
     VALIDATE $? "Installing Git"   
 else
     echo -e "Git is already ... $y INSTALLED"
