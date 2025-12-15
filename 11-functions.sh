@@ -22,7 +22,7 @@ fi
 
 dnf list installed mysql
 
-if [$? -gt 0]
+if [ $? -ne 0 ]
 then
     dnf install mysql -y  
     VALIDATE $?
@@ -32,7 +32,7 @@ fi
 
 dnf list installed git
 
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
     dnf install git -y
     VALIDATE $? "Installing Git"
