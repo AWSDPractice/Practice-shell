@@ -12,7 +12,6 @@ VALIDATE(){
         echo "$2..Success"
     fi
 
-
 }
 
  if [ $USERID -gt 0 ]
@@ -33,7 +32,7 @@ fi
 
 dnf list installed git
 
-if [ $? -gt 0]
+if [ $? -ne 0]
 then
     dnf install git -y
     VALIDATE $? "Installing Git"
