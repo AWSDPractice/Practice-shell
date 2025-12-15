@@ -8,7 +8,7 @@
 
  LOGS_FOLDER="var/log/shellscript-logs"
  LOG_FILE=$(echo $0|cut -d "." -f1)
- TIME_STAMP=$(ate +y-%m-%d-%h-%m)
+ TIME_STAMP=$(date +y-%m-%d-%h-%m)
  LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 
@@ -24,7 +24,7 @@ VALIDATE(){
 
 }
 
-echo "script execution history at : $TIMESTAMP"  &>>$LOG_FILE_NAME
+    echo "script execution history at : $TIMESTAMP"  &>>$LOG_FILE_NAME
 
  if [ $USERID -gt 0 ]
  then
@@ -32,7 +32,7 @@ echo "script execution history at : $TIMESTAMP"  &>>$LOG_FILE_NAME
     exit 1 # other than 0
 fi 
 
-dnf list installed mysql  &>>$LOG_FILE_NAME
+    dnf list installed mysql  &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then
@@ -42,7 +42,7 @@ else
     echo -e "MYSQL is already.... $y INSTALLED"
 fi
 
-dnf list installed git &>>$LOG_FILE_NAME
+    dnf list installed git &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then
