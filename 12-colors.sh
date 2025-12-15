@@ -31,7 +31,7 @@ then
     dnf install mysql -y  
     VALIDATE $?
 else
-    echo -e " MYSQL is already.... $Y installed"
+    echo -e "MYSQL is already.... $Y INSTALLED"
 fi
 
 dnf list installed git
@@ -39,8 +39,7 @@ dnf list installed git
 if [ $? -ne 0 ]
 then
     dnf install git -y
-    VALIDATE $? "Installing Git"
-   
+    VALIDATE $? "Installing Git"   
 else
-    echo -e "git is already ... $Y installed"
+    echo -e "Git is already ... $Y INSTALLED"
 fi  
