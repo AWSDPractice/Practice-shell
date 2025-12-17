@@ -6,10 +6,10 @@
  G="\e[32m"
  y="\e[33m"
 
- LOGS_FOLDER="var/log/shellscript-logs"
+ LOGS_FOLDER="var/log/Practiceshell-logs"
  LOG_FILE=$(echo $0 | cut -d "." -f1)
- TIME_STAMP=$(date +y-%m-%d-%h-%M)
- LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
+ TIME_STAMP=$(date +%Y-%m-%d-%H-%M)
+ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIME_STAMP.log"
 
 
 VALIDATE(){
@@ -24,7 +24,7 @@ VALIDATE(){
 
 }
 
-echo "script execution history at: $TIMESTAMP"  &>>$LOG_FILE_NAME
+echo "script executed at: $TIMESTAMP"  &>>$LOG_FILE_NAME
 
  if [ $USERID -gt 0 ]
  then
