@@ -3,29 +3,33 @@
  USERID=$(id -u)
  R="\e[31m"
  G="\e[32m"
- y="\e[33m"
+ Y="\e[33m"
+ N="\e[0m"
 
- LOGS_FOLDER="var/log/Practiceshell-logs"
+LOGS_FOLDER="/var/log/Practiceshell-logs"
  LOG_FILE=$(echo $0 | cut -d "." -f1)
  TIME_STAMP=$(date +%Y-%m-%d-%H-%M)
  LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIME_STAMP.log"
 
+#creating log directory
+mkdir -p $LOGS_FOLDER
 
 VALIDATE(){
 
-     if [ $1 -gt 0 ]
+     if [ $1 -ne 0 ]
     then
-        echo -e "$2 ....$R FAILURE $N"
+        echo -e "$2 .... ${R}FAILURE${N}"
         exit 1
     else 
-        echo -e "$2..$G Success $N"
+        echo -e "$2 .... ${G}SUCCESS${N}"
     fi
 
 }
 
-    echo "script start executed at:$TIME_STAMP"  &>>$LOG_FILE_NAME
+    echo "script started at: $TIME_STAMP"  &>>$LOG_FILE_NAME
 
- if [ $USERID -gt 0 ]
+
+ if [ $USERID -ne 0 ]
  then
     echo "ERROR ::You must have sudo access to execute this script"
     exit 1 # other than 0
@@ -34,7 +38,7 @@ fi
 for package in $@
 do
     dnf list installed $package &>>$LOG_FILE_NAME
-    if  [ $? -ne 0]
+    if  [ $? -ne 0 ]
     then 
         dnf install $package -y &>>$LOG_FILE_NAME
         VALIDATE $? "installing $package"
