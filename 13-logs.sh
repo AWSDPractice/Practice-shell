@@ -12,6 +12,9 @@
  LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIME_STAMP.log"
 
 
+ mkdir -p $LOGS_FOLDER
+
+
 VALIDATE(){
 
      if [ $1 -gt 0 ]
