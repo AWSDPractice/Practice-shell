@@ -51,7 +51,7 @@ fi
 
 if [ ! -d DEST_DIR ]
 then
-    echo -e "$DEST_DIR does not exist...please check"
+    echo -e "$DES_DIR does not exist...please check"
     exit -1
 fi
 
