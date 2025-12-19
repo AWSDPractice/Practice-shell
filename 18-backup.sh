@@ -35,7 +35,11 @@ USAGE(){
     echo -e "$R USAGE:: $N sh-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS(Optional)>"
 }
 
-if [ $# -lt 2 ]
+mkdir -p /home/ec2-user/shellscript-logs/
 
+if [ $# -lt 2 ]
+then
+    USAGE
+fi
 
  echo "script started at: $TIME_STAMP"  &>>$LOG_FILE_NAME
