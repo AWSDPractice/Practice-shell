@@ -49,7 +49,7 @@ then
     exit 1
 fi
 
-if [ ! -d DEST_DIR ]
+if [ ! -d DES_DIR ]
 then
     echo -e "$DES_DIR does not exist...please check"
     exit -1
