@@ -6,15 +6,13 @@
  Y="\e[33m"
  N="\e[0m"
 
-SOURCE_DIR="home/ec2-user/app-logs"
-
-LOGS_FOLDER="/var/log/shellscript-logs"
+LOGS_FOLDER="/var/log/expense-logs"
  LOG_FILE=$(echo $0 | cut -d "." -f1)
  TIME_STAMP=$(date +%Y-%m-%d-%H-%M)
  LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIME_STAMP.log"
 
 #creating log directory
-mkdir -p /home/ec2-user/shellscript-logs/
+mkdir -p $LOGS_FOLDER
 
 VALIDATE(){
 
@@ -25,21 +23,25 @@ VALIDATE(){
     else 
         echo -e "$2 .... ${G}SUCCESS${N}"
     fi
+
 }
 
+CHECK_ROOT (){
  if [ $USERID -ne 0 ]
  then
-    echo "ERROR ::You must have sudo access to execute this script"
+    echo "ERROR:: You must have sudo access to execute this script"
     exit 1 # other than 0
 fi 
+}
 
-echo "script started at: $TIME_STAMP"  &>>$LOG_FILE_NAME
+echo "script started executing at: $TIME_STAMP" &>>$LOG_FILE_NAME
 
-FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -mtime +14)
-echo "Files to be deleted: $FILES_TO_DELETE"
+dnf install mysql-server -y  &>>$LOG_FILE_NAME
+VALIDATE $? "installing MYSQL Server"
 
-while read -r file
-do
-    echo "deleting file: $file"
+Systemstl enable mysqld  &>>$LOG_FILE_NAME
+VALIDATE $? "Enabling MYSQL Server"
 
-done <<< $FILES_TO_DELETE
+Systemstl start mysqld  &>>$LOG_FILE_NAME
+VALIDATE $? "Starting MYSQL Server"
+
