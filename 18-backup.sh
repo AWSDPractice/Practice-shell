@@ -54,10 +54,11 @@ if [ -n "$FILES" ]  #true if there are files to zip
     then
          echo -e "successfully created zip file for files older than $DAYS"
          while read -r file #here filepath is the variable name, you can give any name
-do
-    echo "deleting file: $file"
-
-done <<< $FILES_TO_DELETE
+        do
+            echo "deleting file: $filepath"  &>>$LOG_FILE_NAME
+            rm -rf $filepath
+            echo  "Deleted file:: $filepath"
+        done <<< $FILES
     else
         echo -e "$R Error:: $N Failed to create ZIP file"
         exit 1
