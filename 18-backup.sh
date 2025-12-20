@@ -2,7 +2,6 @@
 
 #no need to check user id ..in real time user already the access to do the task
 #thats why here i am not user has root access or not means user id not checking here
-
  R="\e[31m"
  G="\e[32m"
  Y="\e[33m"
@@ -20,22 +19,10 @@ LOGS_FOLDER="/home/ec2-user/shellscript-logs"
 #creating log directory
 mkdir -p $LOGS_FOLDER
 
-VALIDATE(){
-
-     if [ $1 -ne 0 ]
-    then
-        echo -e "$2 .... ${R}FAILURE${N}"
-        exit 1
-    else 
-        echo -e "$2 .... ${G}SUCCESS${N}"
-    fi
-}
-
 USAGE(){
     echo -e "$R USAGE:: $N sh-backup.sh <SOURCE_DIR> <DES_DIR> <DAYS(Optional)>"
     exit 1
 }
-
 
 if [ $# -lt 2 ]
 then
@@ -58,8 +45,7 @@ fi
 
  FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
 
-
- if [ -n "$FILES" ]  #true if there are files to zip
+if [ -n "$FILES" ]  #true if there are files to zip
  then
     echo "Files are: $FILES"
     ZIP_FILE="$DES_DIR/app-logs-$TIMESTAMP.zip"
@@ -67,10 +53,16 @@ fi
     if [ -f "$ZIP_FILE" ]
     then
          echo -e "successfully created zip file for files older than $DAYS"
+         while read -r file #here filepath is the variable name, you can give any name
+do
+    echo "deleting file: $file"
+
+done <<< $FILES_TO_DELETE
     else
         echo -e "$R Error:: $N Failed to create ZIP file"
         exit 1
     fi
-else 
+
+else  
     echo "no files found older than $DAYS"
 fi
