@@ -18,6 +18,7 @@ LOGS_FOLDER="/home/ec2-user/shellscript-logs"
 
 #creating log directory
 mkdir -p $LOGS_FOLDER
+echo "Filename: $0"
 
 USAGE(){
     echo -e "$R USAGE:: $N sh-backup.sh <SOURCE_DIR> <DES_DIR> <DAYS(Optional)>"
@@ -38,25 +39,25 @@ fi
 if [ ! -d $DES_DIR ]
 then
     echo -e "$DES_DIR does not exist...please check"
-    exit -1
+    exit 1
 fi
 
  echo "script started at: $TIMESTAMP"  &>>$LOG_FILE_NAME
 
- FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
+ FILES=$(find $SOURCE_DIR -name "*.log" -mtime +"$DAYS")
 
 if [ -n "$FILES" ]  #true if there are files to zip
  then
     echo "Files are: $FILES"
-    ZIP_FILE="$DES_DIR/app-logs-$TIMESTAMP.zip"
-    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILE"
+    ZIP_FILE="$DES_DIR/app-logs-$TIMESTAMP-$$.zip"
+    find "$SOURCE_DIR" -type f -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILE"
     if [ -f "$ZIP_FILE" ]
     then
          echo -e "successfully created zip file for files older than $DAYS"
          while read -r filepath #here filepath is the variable name, you can give any name
         do
             echo "Deleting file: $filepath"  &>>$LOG_FILE_NAME
-            rm -rf $filepath
+            rm -rf "$filepath"
             echo  "Deleted file: $filepath"
         done <<< $FILES
     else
