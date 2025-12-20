@@ -4,4 +4,4 @@ MSG=$helloSCRIPT1
 
 echo "hi from: $MSG"
 
-sh script2.sh
+sh 20-script2.sh
