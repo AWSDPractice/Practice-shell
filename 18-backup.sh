@@ -63,7 +63,7 @@ fi
  then
     echo "Files are: $FILES"
     ZIP_FILE="$DES_DIR/app-logs-$TIMESTAMP.zip"
-    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip @ "$ZIP_FILES"
+    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILES"
 else 
     echo "no files found older than $DAYS"
 fi
