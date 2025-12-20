@@ -3,3 +3,5 @@
 MSG=$helloSCRIPT2
 
 echo "hi from: $MSG"
+
+echo "$GREET"
