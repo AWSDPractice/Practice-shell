@@ -14,8 +14,8 @@ DAYS=${3:-14} #if user not providing no.of datys we are taking 14 days as defaul
 
 LOGS_FOLDER="/home/ec2-user/shellscript-logs"
  LOG_FILE=$(echo $0 | cut -d "." -f1)
- TIME_STAMP=$(date +%Y-%m-%d-%H-%M)
- LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIME_STAMP.log"
+ TIMESTAMP=$(date +%Y-%m-%d-%H-%M)
+ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 #creating log directory
 mkdir -p $LOGS_FOLDER
@@ -54,14 +54,16 @@ then
     exit -1
 fi
 
- echo "script started at: $TIME_STAMP"  &>>$LOG_FILE_NAME
+ echo "script started at: $TIMESTAMP"  &>>$LOG_FILE_NAME
 
  FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
 
 
- if [ -n "$FILES" ]
+ if [ -n "$FILES" ]  #true if there are files to zip
  then
     echo "Files are: $FILES"
+    ZIP_FILE="$DES_DIR/app-logs-$TIMESTAMP.zip"
+    FILES | zip @ "$ZIP_FILES"
 else 
     echo "no files found older than $DAYS"
 fi
