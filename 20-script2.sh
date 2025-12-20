@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MSG=$helloSCRIPT2
+MSG=$SCRIPT2
 
 echo "hi from: $MSG"
 
